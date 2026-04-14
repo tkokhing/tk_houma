@@ -1,0 +1,24 @@
+name: Record Star Event
+
+on:
+  watch:
+    types: [started]  # fires on every star event
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout counter repo
+        uses: actions/checkout@v4
+
+      - name: Append timestamp to record_star.txt
+        run: |
+          echo "$(date +"%Y-%m-%dT%H:%M:%SZ")" >> record_star.txt
+
+      - name: Commit record
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add record_star.txt
+          git commit -m "record: visit at $(date +"%Y-%m-%dT%H:%M:%SZ")"
+          git push

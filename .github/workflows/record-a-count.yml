@@ -17,8 +17,6 @@ jobs:
 
       - name: Commit record
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add record_star.txt
           git commit -m "record: visit at $(date +"%Y-%m-%dT%H:%M:%SZ")"
           git push
